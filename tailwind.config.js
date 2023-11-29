@@ -18,7 +18,7 @@ module.exports = {
       '5xl': '3rem',
       '6xl': '4rem',
       'custom': '2.8125rem',
-      'custom2': '1.125rem'
+      'custom2': '1.125rem',
     },
     fontWeight: {
       'thin': 100,
