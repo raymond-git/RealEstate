@@ -69,6 +69,10 @@ body {
   color: #333333
 }
 
+.ecommerce_border_color {
+  background-color: white;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
