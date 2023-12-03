@@ -4,20 +4,22 @@ export const fetchAllData = async () => {
 
     const options = {
         method: 'GET',
-        url: 'https://realtor16.p.rapidapi.com/property',
+        url: 'https://realty-in-us.p.rapidapi.com/locations/v2/auto-complete',
         params: {
-            property_id: '1497548641'
+            input: 'California, San Francisco',
+            limit: '30'
         },
         headers: {
             'X-RapidAPI-Key': 'c77ac38ea7mshc3153da3be08b85p1fa043jsncb05780c8367',
-            'X-RapidAPI-Host': 'realtor16.p.rapidapi.com'
+            'X-RapidAPI-Host': 'realty-in-us.p.rapidapi.com'
         }
     };
 
     try {
-        const realEstateData = await axios.request(options);
-        return realEstateData;
+        const response = await axios.request(options);
+        console.log(response.data);
+        return response.data
     } catch (error) {
-        console.log(error)
+        console.error(error);
     }
 }
