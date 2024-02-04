@@ -3,17 +3,38 @@ import { fetchAllData } from './api';
 
 const Homepage = () => {
 
+    const [userInput, setUserInput] = useState([]);
+
+    
+    function handleUserInput(event) {
+        const userInput = event.target.value;
+        setUserInput(userInput);
+        searchBar(userInput);
+        console.log(userInput);
+    }
+
     const [allData, setAllData] = useState([]);
 
     useEffect(() => {
         const getAllData = async () => {
             const realEstate = await fetchAllData();
             setAllData(realEstate);
-            console.log('Fetched data:', realEstate);
+            console.log(realEstate);
+            // console.log('Fetched data:', realEstate);
         };
         getAllData();
     }, [])
 
+
+    // Search bar filter
+
+    const searchBar = async () => {
+        const search = await fetchAllData();
+        const housing = search.filter((searchHousing) => {
+            return searchHousing.id
+        })
+        console.log(housing)
+    }
 
     return (
         <div className='container'>
@@ -26,7 +47,18 @@ const Homepage = () => {
                 <div className="input-group-prepend">
                     <span type="submit" className="input-group-text" id="inputGroup-sizing-default">Seek Home</span>
                 </div>
-                <input type="text" className="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder='City, State, Address, Postal Code' />
+
+                <form>
+                    <input
+                        type="text"
+                        onChange={handleUserInput}
+                        value={userInput}
+                        className="form-control"
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        placeholder='City, State, Address, Postal Code' />
+                </form>
+
             </div>
 
             <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 text-center p-5'>
@@ -84,7 +116,7 @@ const Homepage = () => {
                       
                             <img className="w-28 h-28 lg:w-32 lg:h-32 mx-auto" src="logo192.png" alt="product"></img>
                             <h1 className="text-base md:text-xl mt-10">Bed Rooms: 2 | 2 Floors | 2810 Sqft House on Sale </h1>
-                            <p className="mobile-responsive-fontprice-product robotoFont font-bold text-base md:text-lg pt-4 price-color">{data.autocomplete[0].city}</p>
+                            <p className="mobile-responsive-fontprice-product robotoFont font-bold text-base md:text-lg pt-4 price-color">{data}</p>
                         
                         </div>
 
