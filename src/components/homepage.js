@@ -9,7 +9,7 @@ const Homepage = () => {
     function handleUserInput(event) {
         const userInput = event.target.value;
         setUserInput(userInput);
-        searchBar(userInput);
+        searchBar(userInput)
         console.log(userInput);
     }
 
@@ -18,20 +18,19 @@ const Homepage = () => {
     useEffect(() => {
         const getAllData = async () => {
             const realEstate = await fetchAllData();
-            setAllData(realEstate);
-            console.log(realEstate);
+            setAllData(realEstate.Results);
+            console.log(realEstate.Results);
             // console.log('Fetched data:', realEstate);
         };
         getAllData();
     }, [])
 
 
-    // Search bar filter
-
+    //Search bar filter
     const searchBar = async () => {
         const search = await fetchAllData();
         const housing = search.filter((searchHousing) => {
-            return searchHousing.id
+            return searchHousing && searchHousing.zpid
         })
         console.log(housing)
     }
@@ -110,13 +109,13 @@ const Homepage = () => {
             <div className='flex justify-evenly'>
                 <div className="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 
-        {[allData].map((data, _id) => (
+        {allData.map((data, _id) => (
             <div key={_id}>
                     <div className="ecommerce_border_color rounded-xl lg-shadow w-full h-full flex flex-col justify-between p-12">
                       
                             <img className="w-28 h-28 lg:w-32 lg:h-32 mx-auto" src="logo192.png" alt="product"></img>
                             <h1 className="text-base md:text-xl mt-10">Bed Rooms: 2 | 2 Floors | 2810 Sqft House on Sale </h1>
-                            <p className="mobile-responsive-fontprice-product robotoFont font-bold text-base md:text-lg pt-4 price-color">{data}</p>
+                            <p className="mobile-responsive-fontprice-product robotoFont font-bold text-base md:text-lg pt-4 price-color">{data.zpid}</p>
                         
                         </div>
 
